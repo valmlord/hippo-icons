@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import { useCart } from '@/hooks/use-cart'
@@ -10,25 +9,32 @@ const AddToCartButton = ({
 }: {
   product: Product
 }) => {
-  const { addItem } = useCart()
+  const { addItem, items } = useCart();
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsSuccess(false)
     }, 2000)
-
     return () => clearTimeout(timeout)
   }, [isSuccess])
 
+  const handleAddToCart = () => {
+    const isProductInCart = items.some((item) => item.product.id === product.id);
+
+    if (!isProductInCart) {
+      addItem(product);
+      setIsSuccess(true);
+    }
+  };
+
   return (
     <Button
-      onClick={() => {
-        addItem(product)
-        setIsSuccess(true)
-      }}
+      onClick={handleAddToCart}
       size='lg'
-      className='w-full'>
+      className='w-full'
+      disabled={isSuccess}
+    >
       {isSuccess ? 'Added!' : 'Add to cart'}
     </Button>
   )
