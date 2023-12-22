@@ -9,8 +9,20 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'hippoicons.korshukovstepan.dev',
+        hostname: '**.korshukovstepan.dev',
         pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.korshukovstepan.dev',
+        port: '',
+        pathname: '/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.korshukovstepan.dev',
+        port: '',
+        pathname: '/product_files/**',
       },
     ],
   },
